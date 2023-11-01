@@ -3,10 +3,11 @@
 <head>
     <title>Sokoban Solver</title>
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/dist/css/styles.css') }}">
+
 </head>
 <body onclick="console.log('asdas')">
-    <div class="container">
+    <div class="container container-sm flex flex-col">
         <h1 class="text-center">Sokoban Solver</h1>
         <form action="/create_board" method="post">
             <div class="form-group row">
