@@ -45,4 +45,4 @@ def solve():
     return render_template('index.html', m=m, n=n, submitted_board=board)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True,port=5001)

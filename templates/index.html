@@ -5,10 +5,9 @@
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
+<body onclick="console.log('asdas')">
     <div class="container">
         <h1 class="text-center">Sokoban Solver</h1>
-
         <form action="/create_board" method="post">
             <div class="form-group row">
                 <label for="board-size" class="col-sm-3 col-form-label">Board Size (e.g., 7x7):</label>
@@ -16,7 +15,6 @@
                     <input type="text" id="board-size" name="board-size" class="form-control" required>
                 </div>
             </div>
-
             <div class="form-group row">
                 <div class="offset-sm-3 col-sm-9">
                     <input type="submit" value="Create Board" class="btn btn-primary">
@@ -36,9 +34,18 @@
                 <tr>
                     {% for column in range(n) %}
                     <td>
+                        {% if row == 0 or row == m-1 or column == 0 or column == n-1 %}
                         <select name="board-row-{{ row }}-col-{{ column }}" class="form-control" required>
+                        {% else %}
+                        <select name="board-row-{{ row }}-col-{{ column }}" class="form-control">
+                        {% endif %}
+                            {% if row == 0 or row == m-1 or column == 0 or column == n-1 %}
                             <option value=" "> </option>
+                            <option selected value="#">#</option>
+                            {% else %}
+                            <option selected value=" "> </option>
                             <option value="#">#</option>
+                            {% endif %}
                             <option value="O">O</option>
                             <option value="X">X</option>
                             <option value="@">@</option>
