@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    {% if title %}
+            <title>Blog App-{{ title }}</title>
+    {% else %}
+            <title>Blog App</title>
+    {% endif %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  </head>
+  <body>
+    <header>
+    </header>
+      {% block content %}
+      {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sokoban Solver</title>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Sokoban Solver</h1>
+
+        <form action="/create_board" method="post">
+            <div class="form-group row">
+                <label for="board-size" class="col-sm-3 col-form-label">Board Size (e.g., 7x7):</label>
+                <div class="col-sm-9">
+                    <input type="text" id="board-size" name="board-size" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="offset-sm-3 col-sm-9">
+                    <input type="submit" value="Create Board" class="btn btn-primary">
+                </div>
+            </div>
+        </form>
+
+        {% if error %}
+        <p class="text-danger">{{ error }}</p>
+        {% endif %}
+
+        {% if m and n %}
+        <h3 class="text-center">Fill the Board</h3>
+        <form action="/solve" method="post">
+            <table class="table table-bordered ">
+                {% for row in range(m) %}
+                <tr>
+                    {% for column in range(n) %}
+                    <td>
+                        <select name="board-row-{{ row }}-col-{{ column }}" class="form-control" required>
+                            <option value=" "> </option>
+                            <option value="#">#</option>
+                            <option value="O">O</option>
+                            <option value="X">X</option>
+                            <option value="@">@</option>
+                            <option value="P">P</option>
+                        </select>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="form-group">
+                <label for="legend-text">Legend:</label>
+                <textarea id="legend-text" name="legend-text" class="form-control" rows="3" readonly>
+" " : Empty
+"#" : Wall 
+"O" : Target
+"X" : Block 
+"@" : Bloack and Target
+"P" : Playerj
+                </textarea>
+            </div>
+            <div class="text-center">
+                <input type="hidden" name="board-size" value="{{ m }}x{{ n }}">
+                <input type="submit" value="Submit Board" class="btn btn-primary">
+            </div>
+        </form>
+        {% endif %}
+    </div>
+
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+</body>
+</html>
