@@ -3,14 +3,13 @@
 <head>
     <title>Sokoban Solver</title>
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/dist/css/styles.css') }}">
-
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dist/css/output.css') }}">
 </head>
-<body onclick="console.log('asdas')">
+<body>
     <div class="container container-sm flex flex-col">
         <h1 class="text-center">Sokoban Solver</h1>
         <form action="/create_board" method="post">
-            <div class="form-group row">
+            <div class="row">
                 <label for="board-size" class="col-sm-3 col-form-label">Board Size (e.g., 7x7):</label>
                 <div class="col-sm-9">
                     <input type="text" id="board-size" name="board-size" class="form-control" required>
@@ -24,21 +23,23 @@
         </form>
 
         {% if error %}
-        <p class="text-danger">{{ error }}</p>
+        <div class="flex px-2 py-1 bg-red-50">
+            <p class="text-red-700">{{ error }}</p>
+        </div>
         {% endif %}
 
         {% if m and n %}
         <h3 class="text-center">Fill the Board</h3>
         <form action="/solve" method="post">
-            <table class="table table-bordered ">
+            <table>
                 {% for row in range(m) %}
                 <tr>
                     {% for column in range(n) %}
                     <td>
                         {% if row == 0 or row == m-1 or column == 0 or column == n-1 %}
-                        <select name="board-row-{{ row }}-col-{{ column }}" class="form-control" required>
+                        <select name="board-row-{{ row }}-col-{{ column }}" required>
                         {% else %}
-                        <select name="board-row-{{ row }}-col-{{ column }}" class="form-control">
+                        <select name="board-row-{{ row }}-col-{{ column }}">
                         {% endif %}
                             {% if row == 0 or row == m-1 or column == 0 or column == n-1 %}
                             <option value=" "> </option>
