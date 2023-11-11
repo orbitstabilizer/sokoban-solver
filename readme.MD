@@ -13,6 +13,7 @@ On the root directory:
 
 ### Credits
 
-Yusuf AKİN
+Umit Can Evleksiz
+Yusuf AKIN
 
 
